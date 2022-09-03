@@ -93,7 +93,8 @@ export default {
       colunas: delimitaMapa(colunas, tela.colunas),
       tela,
       mapa,
-      boneco
+      boneco,
+      trava: false
     };
   },
   components: { Column },
@@ -151,10 +152,15 @@ export default {
         ? -1
         : 1;
 
-      // P/ Esquerda ou P/ Direita
-      if ((e.keyCode === 97) || (e.keyCode === 100)) this.colunas = this.movimentar(blocos, this.colunas[0].indice + blocos, tela.colunas.total, colunas, this.colunas);
-      // P/ Cima ou P/ Baixo
-      if ((e.keyCode === 119) || (e.keyCode === 115)) this.linhas = this.movimentar(blocos, this.linhas[0].indice + blocos, tela.linhas.total, linhas, this.linhas);
+      if(!this.trava) {
+        // P/ Esquerda ou P/ Direita
+        if ((e.keyCode === 97) || (e.keyCode === 100)) this.colunas = this.movimentar(blocos, this.colunas[0].indice + blocos, tela.colunas.total, colunas, this.colunas);
+        // P/ Cima ou P/ Baixo
+        if ((e.keyCode === 119) || (e.keyCode === 115)) this.linhas = this.movimentar(blocos, this.linhas[0].indice + blocos, tela.linhas.total, linhas, this.linhas);
+        
+        setTimeout(()=> this.trava = false, 300)
+        this.trava = true
+      }
     }
   }
 }
