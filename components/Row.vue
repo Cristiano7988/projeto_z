@@ -1,6 +1,6 @@
 <template>
     <div :class="classes" class="field">
-        <img class="imagem" v-if="classes.includes('carro') || classes.includes('carro-preto')" src="../.nuxt/assets/carro.png" />
+        <img class="imagem" v-if="classes.includes('carro') || classes.includes('carro-preto')" src="/img/carro.png" />
         <img
           class="imagem"
           v-if="
@@ -8,21 +8,21 @@
             classes.includes('carro-azul') ||
             classes.includes('carro-verde')
           "
-          src="../.nuxt/assets/carro-colorido.png"
+          src="/img/carro-colorido.png"
         />
         <img
           class="imagem fogo-grande"
           v-if="
             classes.includes('fogo')
           "
-          src="../.nuxt/assets/fogo.png"
+          src="/img/fogo.png"
         />
         <img
           class="imagem fogo-pequeno"
           v-if="
             classes.includes('fogo')
           "
-          src="../.nuxt/assets/fogo.png"
+          src="/img/fogo.png"
         />
         <div v-if="criarBoneco && boneco.vida" class="char">
           <div v-if="boneco.hit" class="hit">-10</div>
