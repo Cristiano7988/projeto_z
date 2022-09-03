@@ -174,7 +174,7 @@ body {
 .alerta {
   display: flex;
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   top: 50%;
   width: 100%;
   justify-content: center;

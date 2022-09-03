@@ -24,6 +24,30 @@
           "
           src="/img/fogo.png"
         />
+        <img
+          v-if="
+            classes.includes('house l1 c1') ||
+            classes.includes('house l1 c2') ||
+            classes.includes('house l1 c3') ||
+            classes.includes('house l2 c1') ||
+            classes.includes('house l2 c2') ||
+            classes.includes('house l2 c3') ||
+            classes.includes('house l3 c1') ||
+            classes.includes('house l3 c2') ||
+            classes.includes('house l3 c3') ||
+
+            classes.includes('house2 l1 c1') ||
+            classes.includes('house2 l1 c2') ||
+            classes.includes('house2 l1 c3') ||
+            classes.includes('house2 l2 c1') ||
+            classes.includes('house2 l2 c2') ||
+            classes.includes('house2 l2 c3') ||
+            classes.includes('house2 l3 c1') ||
+            classes.includes('house2 l3 c2') ||
+            classes.includes('house2 l3 c3')
+          "
+          src="/img/house.png"
+        />
         <div v-if="criarBoneco && boneco.vida" class="char">
           <div v-if="boneco.hit" class="hit">-10</div>
           <div :style="'width: '+boneco.vida+'%'" :class="['barra']" ></div>
@@ -69,6 +93,46 @@ export default {
 </script>
 
 <style>
+    .field.house, .field.house2  {
+        overflow: hidden;
+    }
+    .field.house img, .field.house2 img  {
+        position: relative;
+        z-index: 1;
+        width: 350px;
+    }
+
+    .field.house.l1 img { bottom: -71px; }
+    .field.house.l1.c3 img { left: -110px; }
+    .field.house.l1.c2 img { left: -60px; }
+    .field.house.l1.c1 img { left: -10px; }
+
+    .field.house.l2 img { bottom: -120px; }
+    .field.house.l2.c3 img { left: -110px; }    
+    .field.house.l2.c2 img { left: -60px; }    
+    .field.house.l2.c1 img { left: -10px; }
+
+    .field.house.l3 img { bottom: -170px; }
+    .field.house.l3.c3 img { left: -110px; }    
+    .field.house.l3.c2 img { left: -60px; }    
+    .field.house.l3.c1 img { left: -10px; }
+    
+
+    .field.house2.l1 img { bottom: 106px; }
+    .field.house2.l1.c3 img { left: -110px; }
+    .field.house2.l1.c2 img { left: -60px; }
+    .field.house2.l1.c1 img { left: -10px; }
+    
+    .field.house2.l2 img { bottom: 50px; }
+    .field.house2.l2.c3 img { left: -110px; }    
+    .field.house2.l2.c2 img { left: -60px; }    
+    .field.house2.l2.c1 img { left: -10px; }
+    
+    .field.house2.l3 img { bottom: 2px; }
+    .field.house2.l3.c3 img { left: -110px; }    
+    .field.house2.l3.c2 img { left: -60px; }    
+    .field.house2.l3.c1 img { left: -10px; }
+
     .hit {
         position: absolute;
         top: -30px;
@@ -102,6 +166,10 @@ export default {
     }
     .asfalto {
         background: #333;
+        z-index: 3;
+    }
+    .fogo-grande {
+        box-shadow: inset 0px -33px 23px rgba(231, 107, 5, 0.3), 0px -5px 13px rgb(231 107 5 / .3);
     }
     .fogo-grande, .fogo-pequeno {
         filter: blur(1px);
