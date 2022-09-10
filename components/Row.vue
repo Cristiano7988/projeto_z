@@ -4,6 +4,7 @@
           class="imagem"
           v-for="(image, key) in images"
           :src="`/img/${image}.png`"
+          :image="image"
           :key="key"
         />
         <div v-if="criarBoneco && boneco.vida" :class="['character', boneco.posicao.parado, boneco.posicao.direcao]">
@@ -196,8 +197,8 @@ export default {
         width: 100%;
         position: absolute;
     }
-    .fogo img {        
-        box-shadow: inset 0px -33px 23px rgba(231, 107, 5, 0.3), 0px -5px 13px rgb(231 107 5 / .3);
+    [image=fogo] {
+        box-shadow: inset 0px -33px 23px rgba(231, 107, 5, 0.3), 0px -5px 13px rgb(231 107 5 / .3);     
         height: 70%;
         width: auto;
         animation-duration: 4s;
@@ -216,16 +217,16 @@ export default {
             transform: matrix(1, 0, 0, 1, 0, 0);
         }
     }
-    .carro img, .carro-azul img, .carro-laranja img, .carro-preto img, .carro-verde img {
+    [image^=carro]  {
         transform: rotate(25deg);
     }
-    .carro-preto .imagem {
+    .carro-preto [image^=carro] {
         filter: brightness(0.2);
     }
-    .carro-azul .imagem {
+    .carro-azul [image^=carro] {
         filter: hue-rotate(-190deg);
     }
-    .carro-verde .imagem {
+    .carro-verde [image^=carro] {
         filter: hue-rotate(45deg);
     }
 </style>
