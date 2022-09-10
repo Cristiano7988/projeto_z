@@ -1,52 +1,10 @@
 <template>
     <div :class="classes" class="field">
-        <img class="imagem" v-if="classes.includes('carro') || classes.includes('carro-preto')" src="/img/carro.png" />
         <img
           class="imagem"
-          v-if="
-            classes.includes('carro-laranja') ||
-            classes.includes('carro-azul') ||
-            classes.includes('carro-verde')
-          "
-          src="/img/carro-colorido.png"
-        />
-        <img
-          class="imagem fogo-grande"
-          v-if="
-            classes.includes('fogo')
-          "
-          src="/img/fogo.png"
-        />
-        <img
-          class="imagem fogo-pequeno"
-          v-if="
-            classes.includes('fogo')
-          "
-          src="/img/fogo.png"
-        />
-        <img
-          v-if="
-            classes.includes('house l1 c1') ||
-            classes.includes('house l1 c2') ||
-            classes.includes('house l1 c3') ||
-            classes.includes('house l2 c1') ||
-            classes.includes('house l2 c2') ||
-            classes.includes('house l2 c3') ||
-            classes.includes('house l3 c1') ||
-            classes.includes('house l3 c2') ||
-            classes.includes('house l3 c3') ||
-
-            classes.includes('house2 l1 c1') ||
-            classes.includes('house2 l1 c2') ||
-            classes.includes('house2 l1 c3') ||
-            classes.includes('house2 l2 c1') ||
-            classes.includes('house2 l2 c2') ||
-            classes.includes('house2 l2 c3') ||
-            classes.includes('house2 l3 c1') ||
-            classes.includes('house2 l3 c2') ||
-            classes.includes('house2 l3 c3')
-          "
-          src="/img/house.png"
+          v-for="(image, key) in images"
+          :src="`/img/${image}.png`"
+          :key="key"
         />
         <div v-if="criarBoneco && boneco.vida" :class="['character', boneco.posicao.parado, boneco.posicao.direcao]">
           <div v-if="boneco.hit" class="hit">-10</div>
@@ -62,8 +20,14 @@ import objetos from "@/components/objetos.js";
 export default {
     data() {
         return {
-            classes: []
+            classes: [],
+            images: []
         }
+    },
+    methods: {
+      verifica(array) {
+        return this.classes.filter(classe => array.includes(classe)).length
+      }
     },
     props: {
         criarBoneco: {
@@ -83,7 +47,18 @@ export default {
         blocoId: {
             immediate: true,
             handler (blocoId) {
-                this.classes = objetos.methods.getObjetos(blocoId)
+                this.classes = objetos.methods.getObjetos(blocoId).filter(Boolean)
+
+                const carro = this.verifica(['carro', 'carro-preto'])
+                const carroColorido = this.verifica(['carro-laranja','carro-azul','carro-verde'])
+                const fogo = this.verifica(['fogo'])
+                const casa = this.verifica(['house l1 c1', 'house l1 c2', 'house l1 c3', 'house l2 c1', 'house l2 c2', 'house l2 c3', 'house l3 c1', 'house l3 c2', 'house l3 c3', 'house2 l1 c1', 'house2 l1 c2', 'house2 l1 c3', 'house2 l2 c1', 'house2 l2 c2', 'house2 l2 c3', 'house2 l3 c1', 'house2 l3 c2', 'house2 l3 c3'])
+                
+                this.images = []
+                if (carro) this.images.push('carro')
+                if (carroColorido) this.images.push('carro-colorido')
+                if (fogo) this.images.push('fogo')
+                if (casa) this.images.push('casa')
             }
         }
     }
@@ -144,7 +119,6 @@ export default {
         width: 100%;
         height: 100%;
         background: lightslategray;
-        /* border: 1px solid black; */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -218,23 +192,14 @@ export default {
         background: #333;
         z-index: 3;
     }
-    .fogo-grande {
-        box-shadow: inset 0px -33px 23px rgba(231, 107, 5, 0.3), 0px -5px 13px rgb(231 107 5 / .3);
-    }
-    .fogo-grande, .fogo-pequeno {
-        filter: blur(1px);
-        animation-name: example;
-        animation-iteration-count: infinite;
-    }
     .imagem {
         width: 100%;
-        transform: rotate(25deg);
+        position: absolute;
     }
-    .fogo .fogo-grande {
-        transform: unset;        
+    .fogo img {        
+        box-shadow: inset 0px -33px 23px rgba(231, 107, 5, 0.3), 0px -5px 13px rgb(231 107 5 / .3);
         height: 70%;
         width: auto;
-        position: absolute;
         animation-duration: 4s;
     }
     @keyframes example {
@@ -251,14 +216,8 @@ export default {
             transform: matrix(1, 0, 0, 1, 0, 0);
         }
     }
-    .fogo .fogo-pequeno {
-        transform: unset;        
-        height: 40%;
-        width: auto;
-        position: absolute;
-        top: 0;
-        right: 0;
-        animation-duration: 3s;
+    .carro img, .carro-azul img, .carro-laranja img, .carro-preto img, .carro-verde img {
+        transform: rotate(25deg);
     }
     .carro-preto .imagem {
         filter: brightness(0.2);
