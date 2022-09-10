@@ -48,7 +48,7 @@
           "
           src="/img/house.png"
         />
-        <div v-if="criarBoneco && boneco.vida" class="char">
+        <div v-if="criarBoneco && boneco.vida" :class="['character', boneco.posicao.parado, boneco.posicao.direcao]">
           <div v-if="boneco.hit" class="hit">-10</div>
           <div :style="'width: '+boneco.vida+'%'" :class="['barra']" ></div>
         </div>
@@ -150,12 +150,62 @@ export default {
         align-items: center;
         position: relative;
     }
-    .char {
+    .character.esquerda {background-position: 0px 180px;}
+    .character.direita {background-position: 0px 120px;}
+    .character.subindo { background-position: 0px 60px;}
+    .character.descendo { background-position: 0px 0px; }
+    .character.parado.esquerda {background-position: 135px 180px;}
+    .character.parado.direita {background-position: 135px 120px;}
+    .character.parado.subindo {background-position: 135px 60px;}
+    .character.parado.descendo {background-position: 135px 0px;}
+
+    .character.movendo.esquerda {
+        animation-name: esquerda;
+        animation-iteration-count: infinite;
+        animation-duration: .45s;
+        animation-timing-function: step-start;
+    }
+    @keyframes esquerda {
+        0% { background-position: 0px 180px; }
+        50% { background-position: 70px 180px; }
+    }
+    .character.movendo.direita {
+        animation-name: direita;
+        animation-iteration-count: infinite;
+        animation-duration: .45s;
+        animation-timing-function: step-start;
+    }
+    @keyframes direita {
+        0% { background-position: 0px 120px; }
+        50% { background-position: 70px 120px; }
+    }
+    .character.movendo.subindo {
+        animation-name: subindo;
+        animation-iteration-count: infinite;
+        animation-duration: .45s;
+        animation-timing-function: step-start;
+    }
+    @keyframes subindo {
+        0% { background-position: 0px 60px; }
+        50% { background-position: 70px 60px; }
+    }
+    .character.movendo.descendo {
+        animation-name: descendo;
+        animation-iteration-count: infinite;
+        animation-duration: .45s;
+        animation-timing-function: step-start;
+    }
+    @keyframes descendo {
+        0% { background-position: 0px 0px; }
+        50% { background-position: 70px 0px; }
+    }
+    .character {
+        background-image: url("/img/character.png");
+        background-size: 205px;
         position: absolute;
-        border-radius: 50%;
-        width: 30%;
-        height: 30%;
-        background: blue;
+        filter: brightness(0.65);
+        width: 50px;
+        height: 50px;
     }
     .barra {
         position: absolute;

@@ -32,7 +32,9 @@ const boneco = {
   oxigenio: 100,
   posicao: {
     coluna: 1,
-    linha: 11
+    linha: 11,
+    direcao: 'direita',
+    parado: 'parado'
   }
 }
 
@@ -177,11 +179,19 @@ export default {
     }
   },
   mounted () {
+    document.onkeyup = (e) => { this.boneco.posicao.parado = 'parado' }
     document.onkeypress = (e) => {
       // Avança ou recua 1 bloco
       const blocos = (e.keyCode === 97) || (e.keyCode === 119)
         ? -1
         : 1;
+
+      if(e.keyCode === 97) this.boneco.posicao.direcao = 'esquerda'
+      if(e.keyCode === 100) this.boneco.posicao.direcao = 'direita'
+      if(e.keyCode === 119) this.boneco.posicao.direcao = 'subindo'
+      if(e.keyCode === 115) this.boneco.posicao.direcao = 'descendo'
+      
+      this.boneco.posicao.parado = 'movendo'
 
       if(!this.trava) {
         // P/ Esquerda ou P/ Direita
@@ -189,7 +199,7 @@ export default {
         // P/ Cima ou P/ Baixo
         if ((e.keyCode === 119) || (e.keyCode === 115)) this.linhas = this.movimentar(blocos, this.linhas[0].indice + blocos, tela.linhas.total, linhas, this.linhas);
         
-        setTimeout(()=> this.trava = false, 300)
+        setTimeout(()=> this.trava = false, 100)
         this.trava = true
       }
     }
