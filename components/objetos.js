@@ -205,16 +205,21 @@ export default {
                'l5-c16'  == blocoId && 'asfalto',
                'l5-c17'  == blocoId && 'asfalto',
                'l5-c18'  == blocoId && 'asfalto',
+               'l5-c18'  == blocoId && 'fogo',
 
                'l6-c16'  == blocoId && 'asfalto',
                'l6-c17'  == blocoId && 'asfalto',
+               'l6-c17'  == blocoId && 'fogo',
                'l6-c18'  == blocoId && 'asfalto',
 
                'l7-c16'  == blocoId && 'asfalto',
+               'l7-c16'  == blocoId && 'fogo',
                'l7-c17'  == blocoId && 'asfalto',
+               'l7-c17'  == blocoId && 'fogo',
                'l7-c18'  == blocoId && 'asfalto',
 
                'l8-c16'  == blocoId && 'asfalto',
+               'l8-c16'  == blocoId && 'fogo',
                'l8-c17'  == blocoId && 'asfalto',
                'l8-c18'  == blocoId && 'asfalto',
 

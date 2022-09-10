@@ -99,6 +99,25 @@ export default {
   },
   components: { Column },
   methods: {
+    checaPosicao(blocoId) {
+      const [l, c] = blocoId
+      const {linha, coluna} = this.boneco.posicao
+      const mesmoBloco = coluna == c.replace('c', '') && linha == l.replace('l', '')
+      if (!(mesmoBloco && this.boneco.vida)) return
+
+      this.causarDano()
+      setTimeout(()=> this.checaPosicao(blocoId), 4000)
+    },
+
+    causarDano() {
+      const {vida} = this.boneco
+      if (!vida) return
+  
+      this.boneco.hit = true
+      this.boneco.vida = vida - 10;
+        
+      setTimeout(()=> this.boneco.hit = false, 2000)
+    },
     bloqueiaMovimento(preservaPosicao) {
       this.bloqueado = true;
       setTimeout(()=> this.bloqueado = false, 1000)
@@ -130,10 +149,22 @@ export default {
         .methods
         .getObjetos(blocoId.join('-'))
         .filter(Boolean)
-        .filter(item => item != 'asfalto')
+        .filter(item => !['asfalto', 'fogo'].includes(item))
         .length
 
       if (obstaculo) return this.bloqueiaMovimento(preservaPosicao)
+
+      const hit = objetos
+        .methods
+        .getObjetos(blocoId.join('-'))
+        .filter(Boolean)
+        .filter(item => item == 'fogo')
+        .length
+
+      if (hit) {
+        this.causarDano()
+        setTimeout(()=> this.checaPosicao(blocoId), 4000)
+      }
 
       // Move o boneco
       if (/c/.test(id)) this.boneco.posicao.coluna = novaPosicao
