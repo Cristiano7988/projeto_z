@@ -15,6 +15,7 @@
         :coluna="coluna"
         :linhas="linhas"
         :boneco="boneco"
+        :inimigo="inimigo"
       />
   </div>
 </template>
@@ -36,6 +37,17 @@ const boneco = {
     direcao: 'direita',
     parado: 'parado'
   }
+}
+
+const inimigo = {
+  hit: false,
+  vida: 100,
+  posicao: {
+      linha: 9,
+      coluna: 17,
+      parado: 'parado',
+      direcao: 'descendo'
+    }
 }
 
 // TELA ----------------
@@ -96,6 +108,7 @@ export default {
       tela,
       mapa,
       boneco,
+      inimigo,
       trava: false
     };
   },
@@ -179,6 +192,34 @@ export default {
     }
   },
   mounted () {
+    setInterval(()=> {
+      const {linha, coluna} = this.inimigo.posicao
+      if (linha + 1 == this.boneco.posicao.linha && coluna == this.boneco.posicao.coluna) return this.inimigo.posicao.parado = 'parado'
+      if (linha == this.boneco.posicao.linha && coluna + 1 == this.boneco.posicao.coluna) return this.inimigo.posicao.parado = 'parado'
+      if (linha - 1 == this.boneco.posicao.linha && coluna == this.boneco.posicao.coluna) return this.inimigo.posicao.parado = 'parado'
+      if (linha == this.boneco.posicao.linha && coluna - 1 == this.boneco.posicao.coluna) return this.inimigo.posicao.parado = 'parado'
+
+      if (linha > this.boneco.posicao.linha) {
+        this.inimigo.posicao.linha = linha - 1;
+        this.inimigo.posicao.direcao = 'subindo';
+        this.inimigo.posicao.parado = 'movendo'
+      }
+      else if (linha < this.boneco.posicao.linha) {
+        this.inimigo.posicao.linha = linha + 1;
+        this.inimigo.posicao.direcao = 'descendo';
+        this.inimigo.posicao.parado = 'movendo'
+      }
+      else if (coluna > this.boneco.posicao.coluna) {
+        this.inimigo.posicao.coluna = coluna - 1;
+        this.inimigo.posicao.direcao = 'esquerda';
+        this.inimigo.posicao.parado = 'movendo'
+      }
+      else if (coluna < this.boneco.posicao.coluna) {
+        this.inimigo.posicao.coluna = coluna + 1;
+        this.inimigo.posicao.direcao = 'direita';
+        this.inimigo.posicao.parado = 'movendo'
+      }
+    }, 1000)
     document.onkeyup = (e) => { this.boneco.posicao.parado = 'parado' }
     document.onkeypress = (e) => {
       // Avança ou recua 1 bloco
@@ -199,7 +240,7 @@ export default {
         // P/ Cima ou P/ Baixo
         if ((e.keyCode === 119) || (e.keyCode === 115)) this.linhas = this.movimentar(blocos, this.linhas[0].indice + blocos, tela.linhas.total, linhas, this.linhas);
         
-        setTimeout(()=> this.trava = false, 100)
+        setTimeout(()=> this.trava = false, 500)
         this.trava = true
       }
     }

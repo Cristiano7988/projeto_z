@@ -7,6 +7,10 @@
           :image="image"
           :key="key"
         />
+        <div v-if="criarInimigo && inimigo?.vida" :class="['enemy', inimigo.posicao.parado, inimigo.posicao.direcao]">
+          <div v-if="inimigo.hit" class="hit">-10</div>
+          <div :style="'width: '+inimigo.vida+'%'" :class="['barra']" ></div>
+        </div>
         <div v-if="criarBoneco && boneco.vida" :class="['character', boneco.posicao.parado, boneco.posicao.direcao]">
           <div v-if="boneco.hit" class="hit">-10</div>
           <div :style="'width: '+boneco.vida+'%'" :class="['barra']" ></div>
@@ -35,11 +39,19 @@ export default {
             type: Boolean,
             default: false
         },
+        criarInimigo: {
+            type: Boolean,
+            default: false
+        },
         blocoId: {
             type: String,
             default: ''
         },
         boneco: {
+            type: Object,
+            default: {}
+        },
+        inimigo: {
             type: Object,
             default: {}
         }
@@ -125,49 +137,49 @@ export default {
         align-items: center;
         position: relative;
     }
-    .character.esquerda {background-position: 0px 180px;}
-    .character.direita {background-position: 0px 120px;}
-    .character.subindo { background-position: 0px 60px;}
-    .character.descendo { background-position: 0px 0px; }
-    .character.parado.esquerda {background-position: 135px 180px;}
-    .character.parado.direita {background-position: 135px 120px;}
-    .character.parado.subindo {background-position: 135px 60px;}
-    .character.parado.descendo {background-position: 135px 0px;}
+    .enemy.esquerda, .character.esquerda {background-position: 0px 180px;}
+    .enemy.direita, .character.direita {background-position: 0px 120px;}
+    .enemy.subindo, .character.subindo { background-position: 0px 60px;}
+    .enemy.descendo, .character.descendo { background-position: 0px 0px; }
+    .enemy.parado.esquerda, .character.parado.esquerda {background-position: 135px 180px;}
+    .enemy.parado.direita, .character.parado.direita {background-position: 135px 120px;}
+    .enemy.parado.subindo, .character.parado.subindo {background-position: 135px 60px;}
+    .enemy.parado.descendo, .character.parado.descendo {background-position: 135px 0px;}
 
-    .character.movendo.esquerda {
+    .enemy.movendo.esquerda, .character.movendo.esquerda {
         animation-name: esquerda;
         animation-iteration-count: infinite;
-        animation-duration: .45s;
+        animation-duration: .95s;
         animation-timing-function: step-start;
     }
     @keyframes esquerda {
         0% { background-position: 0px 180px; }
         50% { background-position: 70px 180px; }
     }
-    .character.movendo.direita {
+    .enemy.movendo.direita, .character.movendo.direita {
         animation-name: direita;
         animation-iteration-count: infinite;
-        animation-duration: .45s;
+        animation-duration: .95s;
         animation-timing-function: step-start;
     }
     @keyframes direita {
         0% { background-position: 0px 120px; }
         50% { background-position: 70px 120px; }
     }
-    .character.movendo.subindo {
+    .enemy.movendo.subindo, .character.movendo.subindo {
         animation-name: subindo;
         animation-iteration-count: infinite;
-        animation-duration: .45s;
+        animation-duration: .95s;
         animation-timing-function: step-start;
     }
     @keyframes subindo {
         0% { background-position: 0px 60px; }
         50% { background-position: 70px 60px; }
     }
-    .character.movendo.descendo {
+    .enemy.movendo.descendo, .character.movendo.descendo {
         animation-name: descendo;
         animation-iteration-count: infinite;
-        animation-duration: .45s;
+        animation-duration: .95s;
         animation-timing-function: step-start;
     }
     @keyframes descendo {
@@ -179,6 +191,14 @@ export default {
         background-size: 205px;
         position: absolute;
         filter: brightness(0.65);
+        width: 50px;
+        height: 50px;
+    }
+    .enemy {
+        background-image: url("/img/character.png");
+        background-size: 205px;
+        position: absolute;
+        filter: drop-shadow(0px 1px 8px black) invert(1) hue-rotate(-260deg);;
         width: 50px;
         height: 50px;
     }
