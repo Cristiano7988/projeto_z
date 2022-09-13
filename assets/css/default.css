@@ -1,0 +1,30 @@
+
+.field {
+    color: black;
+    width: 100%;
+    height: 100%;
+    background: lightslategray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hit {
+    position: absolute;
+    top: -30px;
+    font-weight: bold;
+    color: #900;
+}
+.barra {
+    position: absolute;
+    top: -5px;
+    width: 100%;
+    height: 2px;
+    background: lime;
+}
+.imagem {
+    width: 100%;
+    position: absolute;
+}
+

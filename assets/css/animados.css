@@ -1,0 +1,82 @@
+/* --------- ANIMADOS -------- */
+
+/* PERSONAGENS */
+
+.enemy, .character {
+    width: 50px;
+    height: 50px;
+    background-size: 205px;
+    position: absolute;
+}
+
+.character {
+    background-image: url("/img/character.png");
+    filter: brightness(0.65);
+}
+
+.enemy {
+    background-image: url("/img/character.png");
+    filter: drop-shadow(0px 1px 8px black) invert(1) hue-rotate(-260deg);
+}
+
+.enemy.esquerda, .character.esquerda {background-position: 0px 180px;}
+.enemy.direita, .character.direita {background-position: 0px 120px;}
+.enemy.subindo, .character.subindo { background-position: 0px 60px;}
+.enemy.descendo, .character.descendo { background-position: 0px 0px; }
+.enemy.parado.esquerda, .character.parado.esquerda {background-position: 135px 180px;}
+.enemy.parado.direita, .character.parado.direita {background-position: 135px 120px;}
+.enemy.parado.subindo, .character.parado.subindo {background-position: 135px 60px;}
+.enemy.parado.descendo, .character.parado.descendo {background-position: 135px 0px;}
+
+.movendo {
+    animation-iteration-count: infinite;
+    animation-timing-function: step-start;
+    animation-duration: .95s;
+}
+
+.enemy.movendo.esquerda, .character.movendo.esquerda { animation-name: esquerda; }
+.enemy.movendo.direita, .character.movendo.direita { animation-name: direita; }
+.enemy.movendo.subindo, .character.movendo.subindo { animation-name: subindo; }
+.enemy.movendo.descendo, .character.movendo.descendo { animation-name: descendo; }
+
+@keyframes esquerda {
+    0% { background-position: 0px 180px; }
+    50% { background-position: 70px 180px; }
+}
+@keyframes direita {
+    0% { background-position: 0px 120px; }
+    50% { background-position: 70px 120px; }
+}
+@keyframes subindo {
+    0% { background-position: 0px 60px; }
+    50% { background-position: 70px 60px; }
+}
+@keyframes descendo {
+    0% { background-position: 0px 0px; }
+    50% { background-position: 70px 0px; }
+}
+
+/* FOGO */
+
+[image=fogo] {
+    box-shadow: inset 0px -33px 23px rgba(231, 107, 5, 0.3), 0px -5px 13px rgb(231 107 5 / .3);     
+    height: 70%;
+    width: auto;
+    animation-iteration-count: infinite;
+    animation-duration: 4s;
+    animation-name: trepida;
+}
+@keyframes trepida {
+    0% {
+        filter: blur(1px);
+        transform: matrix(1, 0, 0, 1, 0, 0);
+    }
+    50% {
+        filter: blur(2px);
+        transform: matrix(.8, 0, 0, .99, .7, 0);
+    }
+    100% {
+        filter: blur(1px);
+        transform: matrix(1, 0, 0, 1, 0, 0);
+    }
+}

@@ -1,0 +1,60 @@
+/* --------- INANIMADOS --------- */
+
+/* ASFALTO */
+
+.asfalto {
+    background: #333;
+    z-index: 3;
+}
+
+/* HOUSES */
+
+.field.house, .field.house2  {
+    overflow: hidden;
+}
+.field.house img, .field.house2 img  {
+    position: relative;
+    z-index: 1;
+    width: 350px;
+}
+
+/* HOUSE 1 */
+
+.field.house.l1 img { bottom: -71px; }
+.field.house.l1.c3 img { left: -110px; }
+.field.house.l1.c2 img { left: -60px; }
+.field.house.l1.c1 img { left: -10px; }
+
+.field.house.l2 img { bottom: -120px; }
+.field.house.l2.c3 img { left: -110px; }    
+.field.house.l2.c2 img { left: -60px; }    
+.field.house.l2.c1 img { left: -10px; }
+
+.field.house.l3 img { bottom: -170px; }
+.field.house.l3.c3 img { left: -110px; }    
+.field.house.l3.c2 img { left: -60px; }    
+.field.house.l3.c1 img { left: -10px; }
+
+/* HOUSE 2 */
+
+.field.house2.l1 img { bottom: 106px; }
+.field.house2.l1.c3 img { left: -110px; }
+.field.house2.l1.c2 img { left: -60px; }
+.field.house2.l1.c1 img { left: -10px; }
+
+.field.house2.l2 img { bottom: 50px; }
+.field.house2.l2.c3 img { left: -110px; }    
+.field.house2.l2.c2 img { left: -60px; }    
+.field.house2.l2.c1 img { left: -10px; }
+
+.field.house2.l3 img { bottom: 2px; }
+.field.house2.l3.c3 img { left: -110px; }    
+.field.house2.l3.c2 img { left: -60px; }    
+.field.house2.l3.c1 img { left: -10px; }
+
+/* CARRO */
+
+[image^=carro]  { transform: rotate(25deg); }
+.carro-preto [image^=carro] { filter: brightness(0.2); }
+.carro-azul [image^=carro] { filter: hue-rotate(-190deg); }
+.carro-verde [image^=carro] { filter: hue-rotate(45deg); }
