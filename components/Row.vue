@@ -7,11 +7,11 @@
           :image="image"
           :key="key"
         />
-        <div v-if="criarInimigo && inimigo?.vida" :class="['enemy', inimigo.posicao.parado, inimigo.posicao.direcao]">
+        <div v-if="criarInimigo && inimigo?.vida" :class="['elen', inimigo.posicao.parado, inimigo.posicao.direcao]">
           <div v-if="inimigo.hit" class="hit">-10</div>
           <div :style="'width: '+inimigo.vida+'%'" :class="['barra']" ></div>
         </div>
-        <div v-if="criarBoneco && boneco.vida" :class="['character', boneco.posicao.parado, boneco.posicao.direcao]">
+        <div v-if="criarBoneco && boneco.vida" :class="['charlie', boneco.posicao.parado, boneco.posicao.direcao]">
           <div v-if="boneco.hit" class="hit">-10</div>
           <div :style="'width: '+boneco.vida+'%'" :class="['barra']" ></div>
         </div>

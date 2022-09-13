@@ -32,7 +32,7 @@ const boneco = {
   vida: 100,
   oxigenio: 100,
   posicao: {
-    coluna: 1,
+    coluna: 4,
     linha: 11,
     direcao: 'direita',
     parado: 'parado'
@@ -246,7 +246,7 @@ export default {
         // P/ Cima ou P/ Baixo
         if ((e.keyCode === 119) || (e.keyCode === 115)) this.linhas = this.movimentar(blocos, this.linhas[0].indice + blocos, tela.linhas.total, linhas, this.linhas);
         
-        setTimeout(()=> this.trava = false, 500)
+        setTimeout(()=> this.trava = false, 200)
         this.trava = true
       }
     }

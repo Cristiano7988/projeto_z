@@ -2,58 +2,87 @@
 
 /* PERSONAGENS */
 
-.enemy, .character {
-    width: 50px;
-    height: 50px;
-    background-size: 205px;
-    position: absolute;
-}
-
-.character {
-    background-image: url("/img/character.png");
-    filter: brightness(0.65);
-}
-
-.enemy {
-    background-image: url("/img/character.png");
-    filter: drop-shadow(0px 1px 8px black) invert(1) hue-rotate(-260deg);
-}
-
-.enemy.esquerda, .character.esquerda {background-position: 0px 180px;}
-.enemy.direita, .character.direita {background-position: 0px 120px;}
-.enemy.subindo, .character.subindo { background-position: 0px 60px;}
-.enemy.descendo, .character.descendo { background-position: 0px 0px; }
-.enemy.parado.esquerda, .character.parado.esquerda {background-position: 135px 180px;}
-.enemy.parado.direita, .character.parado.direita {background-position: 135px 120px;}
-.enemy.parado.subindo, .character.parado.subindo {background-position: 135px 60px;}
-.enemy.parado.descendo, .character.parado.descendo {background-position: 135px 0px;}
-
 .movendo {
     animation-iteration-count: infinite;
     animation-timing-function: step-start;
-    animation-duration: .95s;
 }
 
-.enemy.movendo.esquerda, .character.movendo.esquerda { animation-name: esquerda; }
-.enemy.movendo.direita, .character.movendo.direita { animation-name: direita; }
-.enemy.movendo.subindo, .character.movendo.subindo { animation-name: subindo; }
-.enemy.movendo.descendo, .character.movendo.descendo { animation-name: descendo; }
+.charlie, .elen {
+    background-image: url("/img/battlers/3X Size/FemHero_GunD.png");
+    background-size: 920px 360px;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+}
 
-@keyframes esquerda {
-    0% { background-position: 0px 180px; }
-    50% { background-position: 70px 180px; }
+/* CHARLIE */
+
+.charlie.movendo { animation-duration: .4s; }
+
+.charlie.descendo { background-position: -90px 180px; }
+.charlie.esquerda {background-position: -90px 135px;}
+.charlie.direita {background-position: -90px 90px;}
+.charlie.subindo { background-position: -90px 45px;}
+.charlie.parado.descendo {background-position: -90px 180px;}
+.charlie.parado.esquerda {background-position: -90px 135px;}
+.charlie.parado.direita {background-position: -90px 90px;}
+.charlie.parado.subindo {background-position: -90px 45px;}
+
+.charlie.movendo.esquerda { animation-name: charlie-esquerda; }
+.charlie.movendo.direita { animation-name: charlie-direita; }
+.charlie.movendo.subindo { animation-name: charlie-subindo; }
+.charlie.movendo.descendo { animation-name: charlie-descendo; }
+
+@keyframes charlie-descendo {
+    0% { background-position: -135px 180px; }
+    50% { background-position: -10px 180px; }
 }
-@keyframes direita {
-    0% { background-position: 0px 120px; }
-    50% { background-position: 70px 120px; }
+@keyframes charlie-esquerda {
+    0% { background-position: -135px 135px; }
+    50% { background-position: -10px 135px; }
 }
-@keyframes subindo {
-    0% { background-position: 0px 60px; }
-    50% { background-position: 70px 60px; }
+@keyframes charlie-direita {
+    0% { background-position: -135px 90px; }
+    50% { background-position: -10px 90px; }
 }
-@keyframes descendo {
-    0% { background-position: 0px 0px; }
-    50% { background-position: 70px 0px; }
+@keyframes charlie-subindo {
+    0% { background-position: -135px 45px; }
+    50% { background-position: -10px 45px; }
+}
+
+/* ELEN */
+
+.elen.movendo { animation-duration: 1s; }
+
+.elen.descendo { background-position: -90px 0px; }
+.elen.esquerda {background-position: -90px -45px;}
+.elen.direita {background-position: -90px -90px;}
+.elen.subindo { background-position: -90px -135px;}
+.elen.parado.descendo {background-position: -90px 0px;}
+.elen.parado.esquerda {background-position: -90px -45px;}
+.elen.parado.direita {background-position: -90px -90px;}
+.elen.parado.subindo {background-position: -90px -135px;}
+
+.elen.movendo.esquerda { animation-name: elen-esquerda; }
+.elen.movendo.direita { animation-name: elen-direita; }
+.elen.movendo.subindo { animation-name: elen-subindo; }
+.elen.movendo.descendo { animation-name: elen-descendo; }
+
+@keyframes elen-descendo {
+    0% { background-position: -135px 0px; }
+    50% { background-position: -10px 0px; }
+}
+@keyframes elen-esquerda {
+    0% { background-position: -135px -45px; }
+    50% { background-position: -10px -45px; }
+}
+@keyframes elen-direita {
+    0% { background-position: -135px -90px; }
+    50% { background-position: -10px -90px; }
+}
+@keyframes elen-subindo {
+    0% { background-position: -135px -135px; }
+    50% { background-position: -10px -135px; }
 }
 
 /* FOGO */
