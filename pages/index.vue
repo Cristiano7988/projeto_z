@@ -121,7 +121,7 @@ export default {
       if (!(mesmoBloco && this.boneco.vida)) return
 
       this.causarDano()
-      setTimeout(()=> this.checaPosicao(blocoId), 4000)
+      setTimeout(()=> this.checaPosicao(blocoId), 2000)
     },
 
     causarDano() {
@@ -131,7 +131,7 @@ export default {
       this.boneco.hit = true
       this.boneco.vida = vida - 10;
         
-      setTimeout(()=> this.boneco.hit = false, 2000)
+      setTimeout(()=> this.boneco.hit = false, 1000)
     },
     bloqueiaMovimento(preservaPosicao) {
       this.bloqueado = true;

@@ -10,18 +10,20 @@
     position: relative;
 }
 
-.hit {
-    position: absolute;
-    top: -30px;
-    font-weight: bold;
-    color: #900;
-}
 .barra {
     position: absolute;
     top: -5px;
-    width: 100%;
+    width: 95%;
+    height: auto;
     height: 2px;
+    border: 1px solid black;
+    z-index: 4;
+    background: black;
+}
+.barra .amount {
+    height: 100%;
     background: lime;
+    width: 100%;
 }
 .imagem {
     width: 100%;

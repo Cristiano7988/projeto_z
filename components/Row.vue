@@ -7,13 +7,17 @@
           :image="image"
           :key="key"
         />
-        <div v-if="criarInimigo && inimigo?.vida" :class="['elen', inimigo.posicao.parado, inimigo.posicao.direcao]">
+        <div v-if="criarInimigo && inimigo?.vida" :class="['elen', inimigo.posicao.parado, inimigo.posicao.direcao, inimigo.hit && 'hit']">
           <div v-if="inimigo.hit" class="hit">-10</div>
-          <div :style="'width: '+inimigo.vida+'%'" :class="['barra']" ></div>
+          <div :class="['barra']" >
+            <div :style="'width: '+inimigo.vida+'%'" class="amount"></div>
+          </div>
         </div>
-        <div v-if="criarBoneco && boneco.vida" :class="['charlie', boneco.posicao.parado, boneco.posicao.direcao]">
-          <div v-if="boneco.hit" class="hit">-10</div>
-          <div :style="'width: '+boneco.vida+'%'" :class="['barra']" ></div>
+        <div v-if="criarBoneco && boneco.vida" :class="['charlie', boneco.posicao.parado, boneco.posicao.direcao, boneco.hit && 'hit']">
+          <div v-if="boneco.hit" class="points">-10</div>
+          <div :class="['barra']" >
+            <div :style="'width: '+boneco.vida+'%'" class="amount"></div>
+          </div>
         </div>
         <!-- {{blocoId}} -->
     </div>

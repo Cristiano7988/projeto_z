@@ -1,5 +1,20 @@
 /* --------- ANIMADOS -------- */
 
+.hit .points {
+    position: absolute;
+    font-weight: bold;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #f00;
+    text-shadow: 1px 1px 5px black;
+    animation: losing-point;
+    animation-duration: 2s;
+}
+
+@keyframes losing-point {
+    0% { bottom: 0; }
+    100% { bottom: 100%; }
+}
+
 /* PERSONAGENS */
 
 .movendo {
@@ -48,6 +63,18 @@
 @keyframes charlie-subindo {
     0% { background-position: -135px 45px; }
     50% { background-position: -10px 45px; }
+}
+
+.charlie.hit {
+    animation: charlie-hit;
+    animation-duration: .125s;
+    animation-iteration-count: infinite;
+    animation-timing-function: step-start;
+}
+
+@keyframes charlie-hit {
+    0% { filter: invert(0); }
+    50% { filter: invert(1); }
 }
 
 /* ELEN */
