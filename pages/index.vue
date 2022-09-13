@@ -192,32 +192,38 @@ export default {
     }
   },
   mounted () {
+    const conduzAte = (linha1, coluna1, linha2, coluna2 ) => {
+      return (
+        (linha1 + 1 == linha2 && coluna1 == coluna2) || 
+        (linha1 == linha2 && coluna1 + 1 == coluna2) || 
+        (linha1 - 1 == linha2 && coluna1 == coluna2) || 
+        (linha1 == linha2 && coluna1 - 1 == coluna2)
+      )
+    }
     setInterval(()=> {
       const {linha, coluna} = this.inimigo.posicao
-      if (linha + 1 == this.boneco.posicao.linha && coluna == this.boneco.posicao.coluna) return this.inimigo.posicao.parado = 'parado'
-      if (linha == this.boneco.posicao.linha && coluna + 1 == this.boneco.posicao.coluna) return this.inimigo.posicao.parado = 'parado'
-      if (linha - 1 == this.boneco.posicao.linha && coluna == this.boneco.posicao.coluna) return this.inimigo.posicao.parado = 'parado'
-      if (linha == this.boneco.posicao.linha && coluna - 1 == this.boneco.posicao.coluna) return this.inimigo.posicao.parado = 'parado'
+
+      const movendo = conduzAte(linha, coluna, this.boneco.posicao.linha, this.boneco.posicao.coluna)
+      if (movendo) return this.inimigo.posicao.parado = 'parado'
+      
+      this.inimigo.posicao.parado = 'movendo'
 
       if (linha > this.boneco.posicao.linha) {
         this.inimigo.posicao.linha = linha - 1;
         this.inimigo.posicao.direcao = 'subindo';
-        this.inimigo.posicao.parado = 'movendo'
       }
       else if (linha < this.boneco.posicao.linha) {
         this.inimigo.posicao.linha = linha + 1;
         this.inimigo.posicao.direcao = 'descendo';
-        this.inimigo.posicao.parado = 'movendo'
       }
+      
       else if (coluna > this.boneco.posicao.coluna) {
         this.inimigo.posicao.coluna = coluna - 1;
         this.inimigo.posicao.direcao = 'esquerda';
-        this.inimigo.posicao.parado = 'movendo'
       }
       else if (coluna < this.boneco.posicao.coluna) {
         this.inimigo.posicao.coluna = coluna + 1;
         this.inimigo.posicao.direcao = 'direita';
-        this.inimigo.posicao.parado = 'movendo'
       }
     }, 1000)
     document.onkeyup = (e) => { this.boneco.posicao.parado = 'parado' }
