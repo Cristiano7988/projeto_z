@@ -186,3 +186,22 @@
         transform: matrix(1, 0, 0, 1, 0, 0);
     }
 }
+
+/* PROJÉTIL */
+
+.projetil {
+    position: absolute;
+    background-color: orange;
+    width: 2px;
+    height: 2px;
+    animation: projetil;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+    z-index: 9;
+    animation-timing-function:ease-out;
+}
+
+@keyframes projetil {
+    0% { left: 0% }
+    100% { left: 3000% }
+}

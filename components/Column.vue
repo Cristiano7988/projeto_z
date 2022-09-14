@@ -8,6 +8,7 @@
       :boneco="boneco"
       :criarInimigo="(coluna.indice == inimigo.posicao.coluna) && (linha.indice == inimigo.posicao.linha)"
       :inimigo="inimigo"
+      :tiro="dispara(boneco.dispara, boneco.posicao.linha, boneco.posicao.coluna + 1, [linha.id, coluna.id].join('-'))"
     />
   </div>
 </template>
@@ -36,6 +37,13 @@ export default {
   },
   components: {
     Row,
+  },
+  methods: {
+    dispara(dispara, linha, coluna, idBlocoAtual) {
+      const idBlocoSeguinte = ['l' + linha, 'c' + coluna].join('-');
+      const detecta = dispara.pistola && (idBlocoAtual === idBlocoSeguinte)
+      return detecta
+    }
   }
 };
 </script>

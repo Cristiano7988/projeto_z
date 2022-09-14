@@ -6,6 +6,9 @@
     background: #333;
     z-index: 3;
 }
+.container-tiro {
+    z-index: 4;
+}
 
 /* HOUSES */
 

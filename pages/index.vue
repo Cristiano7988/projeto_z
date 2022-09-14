@@ -231,7 +231,7 @@ export default {
     }, 1000)
     document.onkeyup = (e) => {
       if ( (e.keyCode === 68) || (e.keyCode === 65) || (e.keyCode === 87) || (e.keyCode === 83)) this.boneco.posicao.parado = 'parado'
-      if (e.keyCode === 32) this.boneco.dispara.pistola = false
+      if (e.keyCode === 32) setTimeout(() => this.boneco.dispara.pistola = false, 1200) 
     }
     document.onkeypress = (e) => {
       // Avança ou recua 1 bloco

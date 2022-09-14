@@ -1,5 +1,5 @@
 <template>
-    <div :class="classes" class="field">
+    <div :class="[classes, tiro && 'container-tiro']" class="field">
         <img
           class="imagem"
           v-for="(image, key) in images"
@@ -7,6 +7,7 @@
           :image="image"
           :key="key"
         />
+        <div v-if="tiro" class="projetil" />
         <div v-if="criarInimigo && inimigo?.vida" :class="['elen', inimigo.posicao.parado, inimigo.posicao.direcao, inimigo.hit && 'hit']">
           <div v-if="inimigo.hit" class="hit">-10</div>
           <div :class="['barra']" >
@@ -58,6 +59,10 @@ export default {
         inimigo: {
             type: Object,
             default: {}
+        },
+        tiro: {
+          type: Boolean,
+          default: false
         }
     },
     watch: {
