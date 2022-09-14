@@ -31,6 +31,9 @@ const boneco = {
   hit: false,
   vida: 100,
   oxigenio: 100,
+  dispara: {
+    pistola: false
+  },
   posicao: {
     coluna: 4,
     linha: 11,
@@ -226,19 +229,23 @@ export default {
         this.inimigo.posicao.direcao = 'direita';
       }
     }, 1000)
-    document.onkeyup = (e) => { this.boneco.posicao.parado = 'parado' }
+    document.onkeyup = (e) => {
+      if ( (e.keyCode === 68) || (e.keyCode === 65) || (e.keyCode === 87) || (e.keyCode === 83)) this.boneco.posicao.parado = 'parado'
+      if (e.keyCode === 32) this.boneco.dispara.pistola = false
+    }
     document.onkeypress = (e) => {
       // Avança ou recua 1 bloco
       const blocos = (e.keyCode === 97) || (e.keyCode === 119)
         ? -1
         : 1;
 
+      if ( (e.keyCode === 97) || (e.keyCode === 100) || (e.keyCode === 119) || (e.keyCode === 115)) this.boneco.posicao.parado = 'movendo'
       if(e.keyCode === 97) this.boneco.posicao.direcao = 'esquerda'
       if(e.keyCode === 100) this.boneco.posicao.direcao = 'direita'
       if(e.keyCode === 119) this.boneco.posicao.direcao = 'subindo'
       if(e.keyCode === 115) this.boneco.posicao.direcao = 'descendo'
       
-      this.boneco.posicao.parado = 'movendo'
+      if(e.keyCode === 32) this.boneco.dispara.pistola = true
 
       if(!this.trava) {
         // P/ Esquerda ou P/ Direita

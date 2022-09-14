@@ -13,7 +13,7 @@
             <div :style="'width: '+inimigo.vida+'%'" class="amount"></div>
           </div>
         </div>
-        <div v-if="criarBoneco && boneco.vida" :class="['charlie', boneco.posicao.parado, boneco.posicao.direcao, boneco.hit && 'hit']">
+        <div v-if="criarBoneco && boneco.vida" :class="['charlie', boneco.posicao.parado, boneco.posicao.direcao, boneco.hit && 'hit', boneco.dispara.pistola && 'dispara pistola']">
           <div v-if="boneco.hit" class="points">-10</div>
           <div :class="['barra']" >
             <div :style="'width: '+boneco.vida+'%'" class="amount"></div>
