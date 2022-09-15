@@ -69,7 +69,7 @@
 
 /* HIT */
 
-.charlie.hit {
+.charlie.hit, .elen.hit {
     animation: charlie-hit;
     animation-duration: .125s;
     animation-iteration-count: infinite;

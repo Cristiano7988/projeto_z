@@ -8,8 +8,9 @@
           :key="key"
         />
         <div v-if="tiro" class="projetil" />
-        <div v-if="criarInimigo && inimigo?.vida" :class="['elen', inimigo.posicao.parado, inimigo.posicao.direcao, inimigo.hit && 'hit']">
-          <div v-if="inimigo.hit" class="hit">-10</div>
+
+        <div v-if="criarInimigo && inimigo.vida" :class="['elen', inimigo.posicao.parado, inimigo.posicao.direcao, inimigo.hit && 'hit']">
+          <div v-if="inimigo.hit" class="points">-10</div>
           <div :class="['barra']" >
             <div :style="'width: '+inimigo.vida+'%'" class="amount"></div>
           </div>

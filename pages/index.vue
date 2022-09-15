@@ -117,24 +117,22 @@ export default {
   },
   components: { Column },
   methods: {
-    checaPosicao(blocoId) {
+    checaPosicao(blocoId, personagem) {
       const [l, c] = blocoId
-      const {linha, coluna} = this.boneco.posicao
+      const {linha, coluna} = personagem.posicao
       const mesmoBloco = coluna == c.replace('c', '') && linha == l.replace('l', '')
-      if (!(mesmoBloco && this.boneco.vida)) return
 
-      this.causarDano()
-      setTimeout(()=> this.checaPosicao(blocoId), 2000)
+      return (mesmoBloco && personagem.vida)
     },
 
-    causarDano() {
-      const {vida} = this.boneco
+    causarDano(personagem) {
+      const {vida} = personagem
       if (!vida) return
   
-      this.boneco.hit = true
-      this.boneco.vida = vida - 10;
+      personagem.hit = true
+      personagem.vida = vida - 10;
         
-      setTimeout(()=> this.boneco.hit = false, 1000)
+      return personagem
     },
     bloqueiaMovimento(preservaPosicao) {
       this.bloqueado = true;
@@ -180,8 +178,24 @@ export default {
         .length
 
       if (hit) {
-        this.causarDano()
-        setTimeout(()=> this.checaPosicao(blocoId), 4000)
+        const danificaBoneco = () => {
+          this.boneco = this.causarDano(this.boneco)
+          setTimeout(()=> this.boneco.hit = false, 1000)
+        }
+
+        const checaRepetidamente = () => {
+          setTimeout(()=> {
+            const permanece = this.checaPosicao(blocoId, this.boneco)
+  
+            if (permanece) {
+              danificaBoneco()
+              checaRepetidamente()
+            }
+          }, 4000)
+        }
+
+        danificaBoneco()
+        checaRepetidamente()
       }
 
       // Move o boneco
@@ -206,27 +220,43 @@ export default {
     setInterval(()=> {
       const {linha, coluna} = this.inimigo.posicao
 
-      const movendo = conduzAte(linha, coluna, this.boneco.posicao.linha, this.boneco.posicao.coluna)
-      if (movendo) return this.inimigo.posicao.parado = 'parado'
-      
-      this.inimigo.posicao.parado = 'movendo'
+      if(!this.inimigo.vida) return
 
-      if (linha > this.boneco.posicao.linha) {
+      const movendo = conduzAte(linha, coluna, this.boneco.posicao.linha, this.boneco.posicao.coluna)
+      
+      this.inimigo.posicao.parado = movendo ? 'movendo' : 'parado'
+
+      if (linha > this.boneco.posicao.linha && !movendo) {
         this.inimigo.posicao.linha = linha - 1;
         this.inimigo.posicao.direcao = 'subindo';
       }
-      else if (linha < this.boneco.posicao.linha) {
+      else if (linha < this.boneco.posicao.linha && !movendo) {
         this.inimigo.posicao.linha = linha + 1;
         this.inimigo.posicao.direcao = 'descendo';
       }
       
-      else if (coluna > this.boneco.posicao.coluna) {
+      else if (coluna > this.boneco.posicao.coluna && !movendo) {
         this.inimigo.posicao.coluna = coluna - 1;
         this.inimigo.posicao.direcao = 'esquerda';
       }
-      else if (coluna < this.boneco.posicao.coluna) {
+      else if (coluna < this.boneco.posicao.coluna && !movendo) {
         this.inimigo.posicao.coluna = coluna + 1;
         this.inimigo.posicao.direcao = 'direita';
+      }
+      
+      const blocoId = ['l'+this.inimigo.posicao.linha, 'c'+this.inimigo.posicao.coluna].join('-');
+
+      const hit = objetos
+        .methods
+        .getObjetos(blocoId)
+        .filter(Boolean)
+        .filter(item => item == 'fogo')
+        .length
+      
+      if (hit) {
+        this.inimigo = this.causarDano(this.inimigo)
+      } else {
+        this.inimigo.hit = false
       }
     }, 1000)
     document.onkeyup = (e) => {
